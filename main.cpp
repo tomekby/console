@@ -1,36 +1,21 @@
-#include "menu.h"
+ï»¿#include "menu.h"
 
 /**
  * @TODO:
- *      - mo¿liwoœæ ustawiania tytu³u konsoli
- *      - mo¿liwoœæ ustawiania wielkoœæi konsoli
- *      - mo¿liwoœæ ustalania kodowania (Windows)
- *      - naprawienie kolorowania i polskich znaków na linuksie (!)
+ *      - moÅ¼liwoÅ›Ä‡ ustawiania tytuÅ‚u konsoli
+ *      - moÅ¼liwoÅ›Ä‡ ustawiania wielkoÅ›Ä‡i konsoli
+ *      - naprawienie kolorowania i polskich znakÃ³w na linuksie (!)
  */
-
-/**
- * Funkcja zamieniaj¹ca literê ma³¹ na wielk¹ (wielkie pozostaj¹ bez zmian)
- *
- * Zdajê sobie sprawê z istnienia funkcji 'toupper()' w bibliotece 'cstdlib'
- * That's just faster
- *
- * @param  const char ch znak do zamiany
- * @return char
- */
-inline char to_upper(const char ch)
-{
-	return char(ch - (ch >= 'a' && ch <= 'z') * 32);
-} // End to_upper()
 
 int main()
 {
-	menu::cls(); // Czyszczenie ekranu jakby coœ by³o wczeœniej uruchamiane oraz dla zmiany ew. koloru t³a
-	menu::print("Przyk³adowy tekst wydrukowany w konsoli i pokolorowany :)", "Przyk³adowy");
-	menu::print("ÊêÓó¥¹Œœ£³¯¿ŸÆæÑñ", menu::ALL);
-	menu::print("ÊêÓó¥¹Œœ£³¯¿ŸÆæÑñ", 0);
+	menu::cls(); // Czyszczenie ekranu jakby coÅ› byÅ‚o wczeÅ›niej uruchamiane oraz dla zmiany ew. koloru tÅ‚a
+	menu::print(L"PrzykÅ‚adowy tekst wydrukowany w konsoli i pokolorowany :)", L"PrzykÅ‚adowy");
+	menu::print(L"Ä˜Ä™Ã“Ã³Ä„Ä…ÅšÅ›ÅÅ‚Å»Å¼Å¹ÅºÄ†Ä‡ÅƒÅ„", menu::ALL);
+	menu::print(L"Ä˜Ä™Ã“Ã³Ä„Ä…ÅšÅ›ÅÅ‚Å»Å¼Å¹ÅºÄ†Ä‡ÅƒÅ„", 0);
 	menu::pause();
 	menu::cls();
-	menu::print("Inne zdanie wydrukowane w konsoli i pokolorowane :)", "zdanie");
+	menu::print(L"Inne zdanie wydrukowane w konsoli i pokolorowane :)", L"zdanie");
 	menu::pause();
 
 	return 0;

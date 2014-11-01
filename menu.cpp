@@ -1,25 +1,25 @@
-#include "menu.h"
+ï»¿#include "menu.h"
 
 #ifndef _WIN32
-	/// Definicje tablic z parametrami formatuj¹cymi tekst w Linuksie
+	/// Definicje tablic z parametrami formatujÄ…cymi tekst w Linuksie
 	constexpr unsigned menu::NORMAL_TEXT_STYLE[];
 	constexpr unsigned menu::INDEX_TEXT_STYLE[];
 #endif
 
 /**
- * Funkcja czyszcz¹ca ekran
+ * Funkcja czyszczÄ…ca ekran
  *
- * Tworzy ró¿ny kod w zale¿noœci od systemu docelowego (Windows/Linux).
- * Nie u¿ywam 'system("cls")', gdy¿ mo¿e to prowadziæ do problemów zw. z bezpieczeñstwem.
+ * Tworzy rÃ³Å¼ny kod w zaleÅ¼noÅ›ci od systemu docelowego (Windows/Linux).
+ * Nie uÅ¼ywam 'system("cls")', gdyÅ¼ moÅ¼e to prowadziÄ‡ do problemÃ³w zw. z bezpieczeÅ„stwem.
  *
  * @return void
  */
 void menu::cls() {
 #ifdef _WIN32
 	// Czyszczenie ekranu na podstawie funkcji z oficjalnej strony Microsoftu
-	// U¿ywa WinAPI, kompilowane tylko na Windows
+	// UÅ¼ywa WinAPI, kompilowane tylko na Windows
 	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(console, NORMAL_TEXT_STYLE); // W razie potrzeby zmiana koloru konsoli na okreœlony
+	SetConsoleTextAttribute(console, NORMAL_TEXT_STYLE); // W razie potrzeby zmiana koloru konsoli na okreÅ›lony
 	COORD screen = { 0, 0 };
 	DWORD chars_written, con_size;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -30,37 +30,37 @@ void menu::cls() {
 	FillConsoleOutputAttribute(console, csbi.wAttributes, con_size, screen, &chars_written);
 	SetConsoleCursorPosition(console, screen);
 #else
-	// Czyszczenie ekranu za pomoc¹ ANSI Escape Codes na podstawie danych znalezionych w internecie
-	// U¿ywa ANSI Escape Codes, dzia³a tylko na Linuksie i tylko tam kompilowane
-	std::cout << "\033[2J\033[1;1H";
+	// Czyszczenie ekranu za pomocÄ… ANSI Escape Codes na podstawie danych znalezionych w internecie
+	// UÅ¼ywa ANSI Escape Codes, dziaÅ‚a tylko na Linuksie i tylko tam kompilowane
+	std::wcout << L"\033[2J\033[1;1H";
 	std::rewind(stdout);
 #endif
 }
 
 /**
- * Zatrzymanie konsoli (u¿ywane do efektu drukowania w menu).
+ * Zatrzymanie konsoli (uÅ¼ywane do efektu drukowania w menu).
  *
  * @return void
  */
 void menu::sleep() {
-	unsigned writing_delay = 0; // Opó¿nienie przy wypisywaniu liter
-	if (menu::FPS > 0) { // Jeœli ma byæ jakieœ opó¿nienie, liczenie go na podstawie podanego FPS
+	unsigned writing_delay = 0; // OpÃ³Å¼nienie przy wypisywaniu liter
+	if (menu::FPS > 0) { // JeÅ›li ma byÄ‡ jakieÅ› opÃ³Å¼nienie, liczenie go na podstawie podanego FPS
 		writing_delay = 1000 / menu::FPS;
 	}
 	else return;
-	// Delay tylko przed liter¹/cyfr¹
+	// Delay tylko przed literÄ…/cyfrÄ…
 #ifdef _WIN32
 	Sleep(writing_delay);
 #else
-	std::cout.flush();
-	usleep(1000 * writing_delay); // OpóŸnienie mniejsze, bo ustawienie stylów trwa odrobinê wiêcej
+	std::wcout.flush();
+	usleep(1000 * writing_delay); // OpÃ³Åºnienie mniejsze, bo ustawienie stylÃ³w trwa odrobinÄ™ wiÄ™cej
 #endif
 }
 
 /**
- * Ustawienie stylu (np. kolor tekstu, podkreœlenie, etc.)
+ * Ustawienie stylu (np. kolor tekstu, podkreÅ›lenie, etc.)
  *
- * @param  const unsigned type typ stylu (np. zwyk³y tekst, zaznaczony)
+ * @param  const unsigned type typ stylu (np. zwykÅ‚y tekst, zaznaczony)
  * @return void
  */
 void menu::set_style(const unsigned type) {
@@ -73,15 +73,15 @@ void menu::set_style(const unsigned type) {
 		SetConsoleTextAttribute(console_out, INDEX_TEXT_STYLE);
 	}
 #else
-	printf("\e[?25l"); // Ukrycie wskaŸnika kursora
+	wprintf("\e[?25l"); // Ukrycie wskaÅºnika kursora
 	if (type == menu::NORMAL_STYLE) {
 		for (unsigned j = 0; j < ARRAYSIZE(menu::NORMAL_TEXT_STYLE); ++j) {
-			printf("%c[%dm", ESC, menu::NORMAL_TEXT_STYLE[j]);
+			wprintf("%c[%dm", ESC, menu::NORMAL_TEXT_STYLE[j]);
 		}
 	}
 	else {
 		for (unsigned j = 0; j < ARRAYSIZE(menu::INDEX_TEXT_STYLE); ++j) {
-			printf("%c[%dm", ESC, menu::INDEX_TEXT_STYLE[j]);
+			wprintf("%c[%dm", ESC, menu::INDEX_TEXT_STYLE[j]);
 		}
 	}
 #endif
@@ -90,17 +90,17 @@ void menu::set_style(const unsigned type) {
 /**
  * Drukowanie wiersza menu
  *
- * Jeœli indeks litery (liczony od 0) nie zostanie podany, nie bêdzie
- * zaznaczonej ¿adnej. Jeœli indeks zostanie podany, wyœwietlona zostanie
- * litera o okreœlonym numerze. Podanie menu::ALL powoduje kolorowanie
- * ca³ego wiersza na kolor indeksu.
+ * JeÅ›li indeks litery (liczony od 0) nie zostanie podany, nie bÄ™dzie
+ * zaznaczonej Å¼adnej. JeÅ›li indeks zostanie podany, wyÅ›wietlona zostanie
+ * litera o okreÅ›lonym numerze. Podanie menu::ALL powoduje kolorowanie
+ * caÅ‚ego wiersza na kolor indeksu.
  *
- * @param  std::string row wiersz do wypisania
+ * @param  std::wstring row wiersz do wypisania
  * @param  const unsigned key_letter = -1 litera do zaznaczenia
  * @return void
  */
-void menu::print(std::string row, const int key_letter) {
-	/// Wstêpne ustawienia konsoli - ustawienie atrybutów tekstu niekolorowanego/kolorowanego
+void menu::print(std::wstring row, const int key_letter) {
+	/// WstÄ™pne ustawienia konsoli - ustawienie atrybutÃ³w tekstu niekolorowanego/kolorowanego
 	if (key_letter == menu::ALL || key_letter == 0) {
 		menu::set_style(menu::INDEX_STYLE);
 	}
@@ -108,7 +108,7 @@ void menu::print(std::string row, const int key_letter) {
 		menu::set_style(menu::NORMAL_STYLE);
 	}
 #ifdef _WIN32
-	/// Konwersja znaków na formê mo¿liw¹ do wydrukowania w konsoli
+	/// Konwersja znakÃ³w na formÄ™ moÅ¼liwÄ… do wydrukowania w konsoli
 	row = menu::win1250_to_cp852(row);
 #endif
 	/// Drukowanie kolejnych liter tekstu
@@ -121,80 +121,80 @@ void menu::print(std::string row, const int key_letter) {
 			menu::set_style(NORMAL_STYLE);
 		}
 		menu::sleep();
-		std::cout << row[i];
+		std::wcout << row[i];
 	} // End for
-	std::cout << std::endl;
+	std::wcout << std::endl;
 }
 
 /**
- * Alias dla funkcji wyœwietlaj¹cej menu z pokolorowanym indeksem.
+ * Alias dla funkcji wyÅ›wietlajÄ…cej menu z pokolorowanym indeksem.
  *
- * Jeœli podany zostanie wyraz to zaznaczona zostanie pierwsza litera.
+ * JeÅ›li podany zostanie wyraz to zaznaczona zostanie pierwsza litera.
  *
- * @param  const std::string row wiersz do wypisania
- * @param  const std::string keyword litera lub wyraz do zaznaczenia
+ * @param  const std::wstring row wiersz do wypisania
+ * @param  const std::wstring keyword litera lub wyraz do zaznaczenia
  * @return void
  */
-void menu::print(const std::string row, const std::string keyword) {
+void menu::print(const std::wstring row, const std::wstring keyword) {
 	unsigned pos = row.find(keyword);
-	if (pos != std::string::npos) menu::print(row, pos);
+	if (pos != std::wstring::npos) menu::print(row, pos);
 	else menu::print(row);
 }
 
 /**
- * Alias dla funkcji wyœwietlaj¹cej menu z pokolorowanym indeksem.
+ * Alias dla funkcji wyÅ›wietlajÄ…cej menu z pokolorowanym indeksem.
  *
- * Jeœli podany zostanie wyraz to zaznaczona zostanie litera tego wyrazu
+ * JeÅ›li podany zostanie wyraz to zaznaczona zostanie litera tego wyrazu
  * o indeksie podanym jako ostatni argument (liczone od 0).
  *
- * @param  const std::string row wiersz do wypisania
- * @param  const std::string keyword litera lub wyraz do zaznaczenia
+ * @param  const std::wstring row wiersz do wypisania
+ * @param  const std::wstring keyword litera lub wyraz do zaznaczenia
  * @param  const unsigned letter numer litery w wyrazie do zaznaczenia
  * @return void
  */
-void menu::print(const std::string row, const std::string keyword, const unsigned letter) {
+void menu::print(const std::wstring row, const std::wstring keyword, const unsigned letter) {
 	unsigned pos = row.find(keyword);
-	if (pos != std::string::npos) menu::print(row, pos + letter);
+	if (pos != std::wstring::npos) menu::print(row, pos + letter);
 	else menu::print(row);
 }
 
 /**
- * Oczekiwanie na u¿yszkodnika aby móg³ zobaczyæ wynik.
- * Nie u¿ywam 'system("pause")', gdy¿ mo¿e to prowadziæ do problemów zw. z bezpieczeñstwem.
- * Poza tym, autorska funkcja pozwala na wiêksz¹ kontrolê nad tym, co i jak jest wypisane.
+ * Oczekiwanie na uÅ¼yszkodnika aby mÃ³gÅ‚ zobaczyÄ‡ wynik.
+ * Nie uÅ¼ywam 'system("pause")', gdyÅ¼ moÅ¼e to prowadziÄ‡ do problemÃ³w zw. z bezpieczeÅ„stwem.
+ * Poza tym, autorska funkcja pozwala na wiÄ™kszÄ… kontrolÄ™ nad tym, co i jak jest wypisane.
  *
  * @return void
  */
 void menu::pause() {
-	menu::print("\nWciœnij <ENTER> aby kontynuowaæ...");
-	std::cin.sync(); // Kasowanie zbêdnych znaków z bufora
-	std::cin.get();  // Oczekiwanie na wciœniêcie klawisza
+	menu::print(L"\nWciÅ›nij <ENTER> aby kontynuowaÄ‡...");
+	std::wcin.sync(); // Kasowanie zbÄ™dnych znakÃ³w z bufora
+	std::wcin.get();  // Oczekiwanie na wciÅ›niÄ™cie klawisza
 }
 
 #ifdef _WIN32
 /**
- * Funkcja konwertuj¹ca znaki z poza ASCII z ANSI na CP 852 (kodowanie konsoli Windows)
+ * Funkcja konwertujÄ…ca znaki z poza ASCII z ANSI na CP 852 (kodowanie konsoli Windows)
  *
- * @param  std::string string ci¹g znaków do przetworzenia
- * @return std::string
+ * @param  std::wstring string ciÄ…g znakÃ³w do przetworzenia
+ * @return std::wstring
  */
-std::string menu::win1250_to_cp852(std::string string) {
-	// Tablica konwersji znaków
-	char conv_table[0xFF];
-	for (unsigned i = 0; i < 0xFF; ++i) conv_table[i] = 0;
-	conv_table[0xA5] = 0xA4; /* ¥ */ conv_table[0xC6] = 0x8F; /* Æ */ conv_table[0xCA] = 0xA8; /* Ê */ conv_table[0xA3] = 0x9D; /* £ */
-	conv_table[0xD1] = 0xE3; /* Ñ */ conv_table[0xD3] = 0xE0; /* Ó */ conv_table[0x8C] = 0x97; /* Œ */ conv_table[0x8F] = 0x8D; /*  */
-	conv_table[0xAF] = 0xBD; /* ¯ */ conv_table[0xB9] = 0xA5; /* ¹ */ conv_table[0xE6] = 0x86; /* æ */ conv_table[0xEA] = 0xA9; /* ê */
-	conv_table[0xB3] = 0x88; /* ³ */ conv_table[0xF1] = 0xE4; /* ñ */ conv_table[0xF3] = 0xA2; /* ó */ conv_table[0x9C] = 0x98; /* œ */
-	conv_table[0x9F] = 0xAB; /* Ÿ */ conv_table[0xBF] = 0xBE; /* ¿ */
-	// Poprawki
-	for (unsigned i = 0; i < string.length(); ++i) {
-		// Interesuje nas tylko drugi (ostatni) bajt - wartoœæ char'a
-		const unsigned short ch = static_cast<unsigned short>(string[i]) & 0x00FF;
-		if (ch > 0x7F && ch < 0xFF && conv_table[ch] != 0) {
-			string[i] = conv_table[ch];
-		}
-	}
+std::wstring menu::win1250_to_cp852(std::wstring string) {
+	//// Tablica konwersji znakÃ³w
+	//char conv_table[0xFF];
+	//for (unsigned i = 0; i < 0xFF; ++i) conv_table[i] = 0;
+	//conv_table[0xA5] = 0xA4; /* Ä„ */ conv_table[0xC6] = 0x8F; /* Ä† */ conv_table[0xCA] = 0xA8; /* Ä˜ */ conv_table[0xA3] = 0x9D; /* Å */
+	//conv_table[0xD1] = 0xE3; /* Åƒ */ conv_table[0xD3] = 0xE0; /* Ã“ */ conv_table[0x8C] = 0x97; /* Åš */ conv_table[0x8F] = 0x8D; /* Å¹ */
+	//conv_table[0xAF] = 0xBD; /* Å» */ conv_table[0xB9] = 0xA5; /* Ä… */ conv_table[0xE6] = 0x86; /* Ä‡ */ conv_table[0xEA] = 0xA9; /* Ä™ */
+	//conv_table[0xB3] = 0x88; /* Å‚ */ conv_table[0xF1] = 0xE4; /* Å„ */ conv_table[0xF3] = 0xA2; /* Ã³ */ conv_table[0x9C] = 0x98; /* Å› */
+	//conv_table[0x9F] = 0xAB; /* Åº */ conv_table[0xBF] = 0xBE; /* Å¼ */
+	//// Poprawki
+	//for (unsigned i = 0; i < string.length(); ++i) {
+	//	// Interesuje nas tylko drugi (ostatni) bajt - wartoÅ›Ä‡ char'a
+	//	const unsigned short ch = static_cast<unsigned short>(string[i]) & 0x00FF;
+	//	if (ch > 0x7F && ch < 0xFF && conv_table[ch] != 0) {
+	//		string[i] = conv_table[ch];
+	//	}
+	//}
 
 	return string;
 }
@@ -202,7 +202,7 @@ std::string menu::win1250_to_cp852(std::string string) {
 
 
 /**
-* Funkcja przenosz¹ca kursor na okreœlon¹ pozycjê w oknie konsoli (pozwala wprowadziæ zmiany bez redrawa okna)
+* Funkcja przenoszÄ…ca kursor na okreÅ›lonÄ… pozycjÄ™ w oknie konsoli (pozwala wprowadziÄ‡ zmiany bez redrawa okna)
 *
 * @param  const int x numer kolumny
 * @param  const int y numer wiersza
@@ -214,12 +214,12 @@ void menu::gotoxy(const unsigned x, const unsigned y) {
 	coord.X = x; coord.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 #else
-	printf("\e[%d;%dH", x, y);
+	wprintf("\e[%d;%dH", x, y);
 #endif
 }
 
 /**
-* Funkcja przenosz¹ca kursor na okreœlon¹ pozycjê w oknie konsoli (pozwala wprowadziæ zmiany bez redrawa okna
+* Funkcja przenoszÄ…ca kursor na okreÅ›lonÄ… pozycjÄ™ w oknie konsoli (pozwala wprowadziÄ‡ zmiany bez redrawa okna
 * Alias dla funkcji menu::gotoxy(x,y)
 *
 * @param  const int x numer kolumny
