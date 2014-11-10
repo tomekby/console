@@ -48,7 +48,7 @@
 	enum{ BG_BLACK = 0x28, BG_RED, BG_GREEN, BG_YELLOW, BG_BLUE, BG_MAGENTA, BG_CYAN, BG_WHITE };
 #else
 	// Ustawienie kodowania w konsoli windows
-	const auto SET_UNICODE = _setmode(_fileno(stdout), _O_U16TEXT);
+	const auto SET_UNICODE = _setmode(_fileno(stdout), _O_U8TEXT);
 #endif
 
 class cursor {
