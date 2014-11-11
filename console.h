@@ -23,6 +23,11 @@
 #	define stdcout std::wcout
 #	define stdcin std::wcin
 	typedef std::wstring string;
+#	define LASTMODE	-1
+#	define C80		3
+#	define C4350		8
+#	define FULLSCREEN	0x8000
+
 #else
 #   include <cstdio>
 #   include <unistd.h>
@@ -48,9 +53,12 @@
 	enum{ BG_BLACK = 0x28, BG_RED, BG_GREEN, BG_YELLOW, BG_BLUE, BG_MAGENTA, BG_CYAN, BG_WHITE };
 #else
 	// Ustawienie kodowania w konsoli windows
-	const auto SET_UNICODE = _setmode(_fileno(stdout), _O_U16TEXT);
+	const auto SET_UNICODE = _setmode(_fileno(stdout), _O_U8TEXT);
 #endif
 
+/**
+ * Dane kursora
+ */
 class cursor {
 public:
 	cursor() : x(0), y(0) {};
@@ -61,6 +69,31 @@ public:
 	unsigned x, y;
 };
 
+/**
+ * Struktura skopiowana z szablonu do projektu
+ */
+struct Conio2ThreadData {
+	//int attrib;
+	int charCount;
+	int charValue;
+	int charFlag;
+	int ungetCount;
+	int ungetBuf[16];
+	HANDLE input;
+	/*int _wscroll;
+	int width;
+	int height;
+	int origwidth;
+	int origheight;
+	int origdepth;
+	int lastmode;
+	HANDLE output;
+	DWORD prevOutputMode;
+	DWORD prevInputMode;*/
+};
+
+
+// @todo: przepisanie na singletona?
 class console {
 public:
 	static void cls();
@@ -69,20 +102,24 @@ public:
 	static void print(const string &row, const string &keyword);
 	static void print(const string &row, const string &keyword, const unsigned letter);
 	static void gotoxy(const unsigned x, const unsigned y);
-	static void set_pos(const unsigned x, const unsigned y); // Alias dla powyższego
+	static void gotoxy(const cursor &pos);
 	static string title(const string &title);
 	static const unsigned ALL = 0xDEADBEEF;
 	static cursor get_cursor_pos();
+	static int getch();
 protected:
 private:
+	static bool HandleKeyEvent(INPUT_RECORD *buf);
 	static void sleep();
 	static void set_style(const unsigned type);
 	/// Ilość znaków wypisywanych w ciągu sekundy
-	static const unsigned FPS = 60;
+	static const unsigned FPS = 360;
 	/// Typ ustawianych informacji
 	static const unsigned NORMAL_STYLE = 1;
 	static const unsigned INDEX_STYLE = 2;
 #ifdef _WIN32
+	// Struktura konfiguracyjna dla funkcji z udostępnionego szablonu
+	static Conio2ThreadData thData;
 	/// Style: http://msdn.microsoft.com/en-us/library/windows/desktop/ms682088%28v=vs.85%29.aspx#_win32_character_attributes
 	// Styl normalnego wypisywanego tekstu
 	static const unsigned NORMAL_TEXT_STYLE = FOREGROUND_GREEN | FOREGROUND_INTENSITY;

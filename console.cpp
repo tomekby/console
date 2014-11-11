@@ -1,10 +1,11 @@
 ﻿#include "console.h"
 
 #ifndef _WIN32
-	/// Definicje tablic z parametrami formatującymi tekst w Linuksie
+	/// Deklaracje tablic z parametrami formatującymi tekst w Linuksie
 	constexpr unsigned console::NORMAL_TEXT_STYLE[];
 	constexpr unsigned console::INDEX_TEXT_STYLE[];
 #else
+	//Conio2ThreadData thData;
 	/**
 	 * Pobieranie od razu jako struktura coords
 	 *
@@ -144,7 +145,7 @@ void console::print(const string &row, const int key_letter) {
  * @return void
  */
 void console::print(const string &row, const string &keyword) {
-	unsigned pos = row.find(keyword);
+	const unsigned pos = row.find(keyword);
 	if (pos != string::npos) console::print(row, pos);
 	else console::print(row);
 }
@@ -161,7 +162,7 @@ void console::print(const string &row, const string &keyword) {
  * @return void
  */
 void console::print(const string &row, const string &keyword, const unsigned letter) {
-	unsigned pos = row.find(keyword);
+	const unsigned pos = row.find(keyword);
 	if (pos != std::string::npos) console::print(row, pos + letter);
 	else console::print(row);
 }
@@ -200,12 +201,11 @@ void console::gotoxy(const unsigned x, const unsigned y) {
 * Funkcja przenosząca kursor na określoną pozycję w oknie konsoli (pozwala wprowadzić zmiany bez redrawa okna
 * Alias dla funkcji console::gotoxy(x,y)
 *
-* @param  const unsigned x numer kolumny
-* @param  const unsigned y numer wiersza
+* @param  const cursor &pos pozycja kursora
 * @return void
 */
-void console::set_pos(const unsigned x, const unsigned y) {
-	console::gotoxy(x, y);
+void console::gotoxy(const cursor &pos) {
+	console::gotoxy(pos.x, pos.y);
 }
 
 /**
@@ -222,9 +222,10 @@ cursor console::get_cursor_pos() {
 	return cursor(info.dwCursorPosition.X, info.dwCursorPosition.Y);
 #else
 	// @todo: zrobienie tak, żeby działało na Linuksie
-	return cursor;
+	return cursor();
 #endif
 }
+
 /**
  * Ustawianie tytułu okna konsoli
  *
@@ -232,7 +233,7 @@ cursor console::get_cursor_pos() {
  * @return void
  */
 string console::title(const string &title) {
-	if (title == _("")) return _("Tytuł konsoli");
+	if (title == _("")) return _("Tytuł konsoli"); // @todo zrobienie gettera
 
 #ifdef _WIN32
 	SetConsoleTitleW(title.c_str());
@@ -242,3 +243,76 @@ string console::title(const string &title) {
 
 	return title;
 }
+
+
+/**
+ * Funkcja skopiowana z szablonu
+ */
+bool console::HandleKeyEvent(INPUT_RECORD *buf) {
+	int ch;
+	ch = (int)(buf->Event.KeyEvent.uChar.AsciiChar) & 255;
+	if (ch == 0) ch = 0x8000 + buf->Event.KeyEvent.wVirtualKeyCode;
+	if (ch == 0x8010 || ch == 0x8011 || ch == 0x8012 || ch == 0x8014
+		|| ch == 0x8090 || ch == 0x8091) return false;
+	thData.charCount = buf->Event.KeyEvent.wRepeatCount;
+	thData.charFlag = ch & 0x8000 ? 1 : 0;
+	if (thData.charFlag) thData.charCount *= 2;
+	switch (ch) {
+	case 0x8000 + 33:	ch = 0x8000 + 73; break;
+	case 0x8000 + 34:	ch = 0x8000 + 81; break;
+	case 0x8000 + 35:	ch = 0x8000 + 79; break;
+	case 0x8000 + 36:	ch = 0x8000 + 71; break;
+	case 0x8000 + 37:	ch = 0x8000 + 75; break;
+	case 0x8000 + 38:	ch = 0x8000 + 72; break;
+	case 0x8000 + 39:	ch = 0x8000 + 77; break;
+	case 0x8000 + 40:	ch = 0x8000 + 80; break;
+	case 0x8000 + 46:	ch = 0x8000 + 83; break;
+	case 0x8000 + 112:	ch = 0x8000 + 59; break;
+	case 0x8000 + 113:	ch = 0x8000 + 60; break;
+	case 0x8000 + 114:	ch = 0x8000 + 61; break;
+	case 0x8000 + 115:	ch = 0x8000 + 62; break;
+	case 0x8000 + 116:	ch = 0x8000 + 63; break;
+	case 0x8000 + 117:	ch = 0x8000 + 64; break;
+	case 0x8000 + 118:	ch = 0x8000 + 65; break;
+	case 0x8000 + 119:	ch = 0x8000 + 66; break;
+	case 0x8000 + 120:	ch = 0x8000 + 67; break;
+	case 0x8000 + 121:	ch = 0x8000 + 68; break;
+	case 0x8000 + 122:	ch = 0x8000 + 133; break;
+	case 0x8000 + 123:	ch = 0x8000 + 134; break;
+	};
+	thData.charValue = ch & 0x7fff;
+	// TODO: translate proper keys (eg. arrows) to 0, xxx
+	return true;
+};
+
+/**
+ * Funkcja skopiowana z szablonu
+ */
+int console::getch() {
+	BOOL rv;
+	DWORD n;
+	INPUT_RECORD buf;
+
+	if (thData.ungetCount > 0) {
+		thData.ungetCount--;
+		return thData.ungetBuf[thData.ungetCount];
+	};
+
+	if (thData.charCount > 0) {
+		thData.charCount--;
+		if (thData.charCount & 1 && thData.charFlag) return 0;
+		else return thData.charValue;
+	};
+
+	while (true) {
+		rv = ReadConsoleInput(thData.input, &buf, 1, &n);
+		if (rv == false) continue;
+		if (buf.EventType != KEY_EVENT) continue;
+		if (buf.Event.KeyEvent.bKeyDown == false) continue;
+		if (HandleKeyEvent(&buf)) break;
+	};
+
+	thData.charCount--;
+	if (thData.charCount & 1 && thData.charFlag) return 0;
+	else return thData.charValue;
+};
