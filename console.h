@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Klasa odpowiedzialna za obsługę frontendu, w szczególności menu
 * Kompilowany kod jest różny w zależności od docelowego systemu.
 * Jest to spowodowane tym, że Windows i Linux używają różnych
@@ -74,7 +74,7 @@ namespace console {
 
 	/**
 	 * Struktura skopiowana z szablonu do projektu
-	 * W sumie nie wszystkie pola są potrzebne, ale 
+	 * W sumie nie wszystkie pola są potrzebne, ale
 	 * nie chce mi się sprawdzać co można wyrzucić
 	 */
 	struct Conio2ThreadData {
