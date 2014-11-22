@@ -14,18 +14,20 @@ namespace console {
 		return coord;
 	}
 	// Struktura konfiguracyjna dla funkcji z udostępnionego szablonu
-	Conio2ThreadData thData;
+	_Conio2ThreadData _thData;
 
 	/**
 	 * Inicjalizacja kodu z udostępnionego szablonu
 	 */
-	void InitConio2() {
-		thData.output = GetStdHandle(STD_OUTPUT_HANDLE);
-		thData.input = GetStdHandle(STD_INPUT_HANDLE);
-		thData.ungetCount = thData.charCount = 0;
+	bool _InitConio2() {
+		_thData.output = GetStdHandle(STD_OUTPUT_HANDLE);
+		_thData.input = GetStdHandle(STD_INPUT_HANDLE);
+		_thData.ungetCount = _thData.charCount = 0;
 
-		thData.lastmode = C80;
-		SetConsoleMode(thData.input, ENABLE_PROCESSED_INPUT);
+		_thData.lastmode = C80;
+		SetConsoleMode(_thData.input, ENABLE_PROCESSED_INPUT);
+
+		return true;
 	}
 
 #endif
@@ -43,7 +45,7 @@ namespace console {
 		// Czyszczenie ekranu na podstawie funkcji z oficjalnej strony Microsoftu
 		// Używa WinAPI, kompilowane tylko na Windows
 		HANDLE console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-		SetConsoleTextAttribute(console_handle, NORMAL_TEXT_STYLE); // W razie potrzeby zmiana koloru konsoli na określony
+		SetConsoleTextAttribute(console_handle, _NORMAL_TEXT_STYLE); // W razie potrzeby zmiana koloru konsoli na określony
 		COORD screen = { 0, 0 };
 		DWORD chars_written, con_size;
 		CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -56,7 +58,7 @@ namespace console {
 #else
 		// Czyszczenie ekranu za pomocą ANSI Escape Codes na podstawie danych znalezionych w internecie
 		// Używa ANSI Escape Codes, działa tylko na Linuksie i tylko tam kompilowane
-		stdcout << "\033[2J\033[1;1H";
+		_out << "\033[2J\033[1;1H";
 		std::rewind(stdout);
 #endif
 	}
@@ -66,17 +68,17 @@ namespace console {
 	 *
 	 * @return void
 	 */
-	void sleep() {
+	void _sleep() {
 		unsigned writing_delay = 0; // Opóżnienie przy wypisywaniu liter
-		if (FPS > 0) { // Jeśli ma być jakieś opóżnienie, liczenie go na podstawie podanego FPS
-			writing_delay = 1000 / FPS;
+		if (_FPS > 0) { // Jeśli ma być jakieś opóżnienie, liczenie go na podstawie podanego FPS
+			writing_delay = 1000 / _FPS;
 		}
 		else return;
 		// Delay tylko przed literą/cyfrą
 #ifdef _WIN32
 		Sleep(writing_delay);
 #else
-		stdcout.flush();
+		_out.flush();
 		usleep(1000 * writing_delay); // Opóźnienie mniejsze, bo ustawienie stylów trwa odrobinę więcej
 #endif
 	}
@@ -87,25 +89,25 @@ namespace console {
 	 * @param  const unsigned type typ stylu (np. zwykły tekst, zaznaczony)
 	 * @return void
 	 */
-	void set_style(const unsigned type) {
+	void _set_style(const unsigned type) {
 #ifdef _WIN32
 		HANDLE console_out = GetStdHandle(STD_OUTPUT_HANDLE);
-		if (type == NORMAL_STYLE) {
-			SetConsoleTextAttribute(console_out, NORMAL_TEXT_STYLE);
+		if (type == _NORMAL_STYLE) {
+			SetConsoleTextAttribute(console_out, _NORMAL_TEXT_STYLE);
 		}
 		else {
-			SetConsoleTextAttribute(console_out, INDEX_TEXT_STYLE);
+			SetConsoleTextAttribute(console_out, _INDEX_TEXT_STYLE);
 		}
 #else
 		printf("\e[?25l"); // Ukrycie wskaźnika kursora
-		if (type == NORMAL_STYLE) {
-			for (unsigned j = 0; j < ARRAYSIZE(NORMAL_TEXT_STYLE); ++j) {
-				printf("%c[%dm", ESC, NORMAL_TEXT_STYLE[j]);
+		if (type == _NORMAL_STYLE) {
+			for (unsigned j = 0; j < ARRAYSIZE(_NORMAL_TEXT_STYLE); ++j) {
+				printf("%c[%dm", ESC, _NORMAL_TEXT_STYLE[j]);
 			}
 		}
 		else {
-			for (unsigned j = 0; j < ARRAYSIZE(INDEX_TEXT_STYLE); ++j) {
-				printf("%c[%dm", ESC, INDEX_TEXT_STYLE[j]);
+			for (unsigned j = 0; j < ARRAYSIZE(_INDEX_TEXT_STYLE); ++j) {
+				printf("%c[%dm", ESC, _INDEX_TEXT_STYLE[j]);
 			}
 		}
 #endif
@@ -126,25 +128,25 @@ namespace console {
 	void print(const string &row, const int key_letter) {
 		/// Wstępne ustawienia konsoli - ustawienie atrybutów tekstu niekolorowanego/kolorowanego
 		if (key_letter == ALL || key_letter == 0) {
-			set_style(INDEX_STYLE);
+			_set_style(_INDEX_STYLE);
 		}
 		else {
-			set_style(NORMAL_STYLE);
+			_set_style(_NORMAL_STYLE);
 		}
 
 		/// Drukowanie kolejnych liter tekstu
 		for (unsigned i = 0; i < row.length(); ++i)
 		{
 			if (i == unsigned(key_letter) && key_letter != 0) {
-				set_style(INDEX_STYLE);
+				_set_style(_INDEX_STYLE);
 			}
 			else if (i == unsigned(key_letter + 1)) {
-				set_style(NORMAL_STYLE);
+				_set_style(_NORMAL_STYLE);
 			}
-			sleep();
-			stdcout << row[i];
+			_sleep();
+			_out << row[i];
 		} // End for
-		stdcout << std::endl;
+		_out << std::endl;
 	}
 
 	/**
@@ -188,8 +190,8 @@ namespace console {
 	 */
 	void pause() {
 		print(_("\nWciśnij <ENTER> aby kontynuować..."));
-		stdcin.sync(); // Kasowanie zbędnych znaków z bufora
-		stdcin.get();  // Oczekiwanie na wciśnięcie klawisza
+		_in.sync(); // Kasowanie zbędnych znaków z bufora
+		_in.get();  // Oczekiwanie na wciśnięcie klawisza
 	}
 
 	/**
@@ -260,15 +262,15 @@ namespace console {
 	/**
 	 * Funkcja skopiowana z szablonu
 	 */
-	bool HandleKeyEvent(INPUT_RECORD *buf) {
+	bool _HandleKeyEvent(INPUT_RECORD *buf) {
 		int ch;
 		ch = (int)(buf->Event.KeyEvent.uChar.AsciiChar) & 255;
 		if (ch == 0) ch = 0x8000 + buf->Event.KeyEvent.wVirtualKeyCode;
 		if (ch == 0x8010 || ch == 0x8011 || ch == 0x8012 || ch == 0x8014
 			|| ch == 0x8090 || ch == 0x8091) return false;
-		thData.charCount = buf->Event.KeyEvent.wRepeatCount;
-		thData.charFlag = ch & 0x8000 ? 1 : 0;
-		if (thData.charFlag) thData.charCount *= 2;
+		_thData.charCount = buf->Event.KeyEvent.wRepeatCount;
+		_thData.charFlag = ch & 0x8000 ? 1 : 0;
+		if (_thData.charFlag) _thData.charCount *= 2;
 		switch (ch) {
 		case 0x8000 + 33:	ch = 0x8000 + 73; break;
 		case 0x8000 + 34:	ch = 0x8000 + 81; break;
@@ -292,7 +294,7 @@ namespace console {
 		case 0x8000 + 122:	ch = 0x8000 + 133; break;
 		case 0x8000 + 123:	ch = 0x8000 + 134; break;
 		};
-		thData.charValue = ch & 0x7fff;
+		_thData.charValue = ch & 0x7fff;
 		// TODO: translate proper keys (eg. arrows) to 0, xxx
 		return true;
 	};
@@ -305,27 +307,27 @@ namespace console {
 		DWORD n;
 		INPUT_RECORD buf;
 
-		if (thData.ungetCount > 0) {
-			thData.ungetCount--;
-			return thData.ungetBuf[thData.ungetCount];
+		if (_thData.ungetCount > 0) {
+			_thData.ungetCount--;
+			return _thData.ungetBuf[_thData.ungetCount];
 		};
 
-		if (thData.charCount > 0) {
-			thData.charCount--;
-			if (thData.charCount & 1 && thData.charFlag) return 0;
-			else return thData.charValue;
+		if (_thData.charCount > 0) {
+			_thData.charCount--;
+			if (_thData.charCount & 1 && _thData.charFlag) return 0;
+			else return _thData.charValue;
 		};
 
 		while (true) {
-			rv = ReadConsoleInput(thData.input, &buf, 1, &n);
+			rv = ReadConsoleInput(_thData.input, &buf, 1, &n);
 			if (rv == false) continue;
 			if (buf.EventType != KEY_EVENT) continue;
 			if (buf.Event.KeyEvent.bKeyDown == false) continue;
-			if (HandleKeyEvent(&buf)) break;
+			if (_HandleKeyEvent(&buf)) break;
 		};
 
-		thData.charCount--;
-		if (thData.charCount & 1 && thData.charFlag) return 0;
-		else return thData.charValue;
+		_thData.charCount--;
+		if (_thData.charCount & 1 && _thData.charFlag) return 0;
+		else return _thData.charValue;
 	};
 } // End namespace console

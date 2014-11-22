@@ -11,7 +11,7 @@
  */
 int main()
 {
-	console::InitConio2();
+	//console::_InitConio2();
 	const console::string TITLE = _("Gra sudoku");
 	console::title(TITLE);
 	console::cls(); // Czyszczenie ekranu jakby coś było wcześniej uruchamiane oraz dla zmiany ew. koloru tła

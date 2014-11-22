@@ -1,4 +1,4 @@
-/**
+﻿/**
 * Klasa odpowiedzialna za obsługę frontendu, w szczególności menu
 * Kompilowany kod jest różny w zależności od docelowego systemu.
 * Jest to spowodowane tym, że Windows i Linux używają różnych
@@ -22,8 +22,8 @@ namespace console {
 #	include <fcntl.h>
 #	include <tchar.h>
 #	define _(x) _T(x)
-#	define stdcout std::wcout
-#	define stdcin std::wcin
+#	define _out std::wcout
+#	define _in  std::wcin
 	typedef std::wstring string;
 #	define LASTMODE		-1
 #	define C80			 3
@@ -34,8 +34,8 @@ namespace console {
 #   include <cstdio>
 #   include <unistd.h>
 #	define _(x) x
-#	define stdcout std::cout
-#	define stdcin std::cin
+#	define _out std::cout
+#	define _in  std::cin
 #	define ARRAYSIZE(x) sizeof(x) / sizeof(x[0])
 	typedef std::string string;
 #endif
@@ -56,7 +56,7 @@ namespace console {
 #else
 	// Ustawienie kodowania w konsoli windows
 	// Hack umożliwiający init jeszcze przed main()
-	const auto SET_UNICODE = _setmode(_fileno(stdout), _O_U8TEXT);
+	const auto _SET_UNICODE = _setmode(_fileno(stdout), _O_U8TEXT);
 #endif
 
 	/**
@@ -72,12 +72,13 @@ namespace console {
 		unsigned x, y;
 	};
 
+#ifdef _WIN32
 	/**
 	 * Struktura skopiowana z szablonu do projektu
-	 * W sumie nie wszystkie pola są potrzebne, ale
+	 * W sumie nie wszystkie pola są potrzebne, ale 
 	 * nie chce mi się sprawdzać co można wyrzucić
 	 */
-	struct Conio2ThreadData {
+	struct _Conio2ThreadData {
 		//int attrib;
 		int charCount;
 		int charValue;
@@ -96,7 +97,11 @@ namespace console {
 		DWORD prevOutputMode;
 		DWORD prevInputMode;
 	};
-	void InitConio2();
+	bool _InitConio2(); // Funkcja inicjująca w/w strukturę
+	// Hack umożliwiający załadowanie przed main
+	// Nie wymaga używania makr do kontroli gdzie ląduje kod
+	const auto _INIT_HACK = _InitConio2();
+#endif
 
 	/**
 	 * Główna obsługa konsoli
@@ -106,31 +111,31 @@ namespace console {
 	void print(const string &row, const int key_letter = -1);
 	void print(const string &row, const string &keyword);
 	void print(const string &row, const string &keyword, const unsigned letter);
+	// Wszystkie znaki mają być pokolorowane
+	const unsigned ALL = 0xDEADBEEF;
 	void gotoxy(const unsigned x, const unsigned y);
 	void gotoxy(const cursor &pos);
 	string title(const string &title);
 	cursor get_cursor_pos();
 	int getch();
-	bool HandleKeyEvent(INPUT_RECORD *buf);
-	void sleep();
-	void set_style(const unsigned type);
-	// Wszystkie znaki mają być pokolorowane
-	const unsigned ALL = 0xDEADBEEF;
+	bool _HandleKeyEvent(INPUT_RECORD *buf);
+	void _sleep();
+	void _set_style(const unsigned type);
 	/// Ilość znaków wypisywanych w ciągu sekundy
-	const unsigned FPS = 360;
+	const unsigned _FPS = 0;
 	/// Typ ustawianych informacji
-	const unsigned NORMAL_STYLE = 1;
-	const unsigned INDEX_STYLE = 2;
+	const unsigned _NORMAL_STYLE = 1;
+	const unsigned _INDEX_STYLE = 2;
 #ifdef _WIN32
 	/// Style: http://msdn.microsoft.com/en-us/library/windows/desktop/ms682088%28v=vs.85%29.aspx#_win32_character_attributes
 	// Styl normalnego wypisywanego tekstu
-	const unsigned NORMAL_TEXT_STYLE = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+	const unsigned _NORMAL_TEXT_STYLE = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	// Styl indeksu (zaznaczonej litery), który trzeba wpisać aby wybrać element z menu
-	const unsigned INDEX_TEXT_STYLE = FOREGROUND_RED | FOREGROUND_INTENSITY;
+	const unsigned _INDEX_TEXT_STYLE = FOREGROUND_RED | FOREGROUND_INTENSITY;
 #else
 	/// Style widoczne wyżej
-	constexpr unsigned NORMAL_TEXT_STYLE[] = { RESET, BG_BLACK, BRIGHT, GREEN };
-	constexpr unsigned INDEX_TEXT_STYLE[] = { RESET, BG_BLACK, UNDERLINE, BRIGHT, RED };
+	constexpr unsigned _NORMAL_TEXT_STYLE[] = { RESET, BG_BLACK, BRIGHT, GREEN };
+	constexpr unsigned _INDEX_TEXT_STYLE[] = { RESET, BG_BLACK, UNDERLINE, BRIGHT, RED };
 #endif
 } // End namespace console
 
