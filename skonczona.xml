@@ -1,0 +1,555 @@
+<?xml version="1.0"?>
+<sudoku active-state="69">
+    <state nr="1">
+        <board>1 - - 6 - 7 5 - - - - - - - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 8 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="2">
+        <board>2 - - 6 - 7 5 - - - - - - - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="3">
+        <board>2 3 - 6 - 7 5 - - - - - - - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="4">
+        <board>2 3 4 6 - 7 5 - - - - - - - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="5">
+        <board>2 3 4 6 9 7 5 - - - - - - - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="6">
+        <board>2 3 4 6 9 7 5 8 - - - - - - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="7">
+        <board>2 3 4 6 9 7 5 8 1 - - - - - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="8">
+        <board>2 3 4 6 9 7 5 8 1 5 - - - - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="9">
+        <board>2 3 4 6 9 7 5 8 1 5 8 - - - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="10">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 - - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="11">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 - - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="12">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 - - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="13">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 - 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="14">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 - 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="15">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 - - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="16">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 - 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="17">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 - - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="18">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 - - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="19">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 - 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="20">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 - 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="21">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 - - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="22">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 - - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="23">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 - - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="24">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 - 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="25">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 - - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="26">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 - - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="27">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 - - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="28">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 - -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="29">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 -
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="30">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 - - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="31">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 - - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="32">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 - - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="33">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 - 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="34">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="35">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="36">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="37">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 - 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="38">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="39">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 - - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="40">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 - - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="41">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 - 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="42">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="43">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="44">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 - - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="45">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 - 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="46">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="47">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 - 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="48">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="49">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="50">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="51">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 - - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="52">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 - - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="53">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 - - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="54">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 - - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="55">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 - - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="56">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 - - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="57">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 - - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="58">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 - - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="59">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 - 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="60">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 1 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="61">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 1 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="62">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 1 5 2 - 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="63">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 1 5 2 4 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="64">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 1 5 2 4 6 - - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="65">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 1 5 2 4 6 8 - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="66">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 1 5 2 4 6 8 3 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="67">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 1 5 2 4 6 8 3 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="68">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 1 5 2 4 6 8 - 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+    <state nr="69">
+        <board>2 3 4 6 9 7 5 8 1 5 8 1 3 2 4 7 9 6 6 9 7 8 5 1 3 4 2 4 5 9 7 3 2 1 6 8 1 7 8 4 6 5 9
+            2 3 3 6 2 1 8 9 4 7 5 9 2 3 5 7 8 6 1 4 8 4 6 9 1 3 2 5 7 7 1 5 2 4 6 8 3 9 </board>
+        <comments>
+            <comment row="7" col="1">1 4 </comment>
+            <comment row="3" col="3">2 3 4 </comment>
+        </comments>
+    </state>
+</sudoku>

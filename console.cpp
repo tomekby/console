@@ -3,6 +3,9 @@
 namespace console {
 
 #ifdef _WIN32
+	std::wistream& _in = std::wcin;
+	std::wostream& _out = std::wcout;
+
 	/**
 	 * Pobieranie od razu jako struktura coords
 	 *
@@ -29,8 +32,27 @@ namespace console {
 
 		return true;
 	}
-
+#else
+	std::istream& _in = std::cin;
+	std::ostream& _out = std::cout;
 #endif
+
+	/**
+	 * Wczytywanie wartości z stdin
+	 */
+	template<class T> T read() {
+		T res;
+		_in >> res;
+
+		return res;
+	}
+
+	// Fix na linkowanie
+	template string read<string>();
+	template unsigned read<unsigned>();
+	template unsigned short read<unsigned short>();
+	template short read<short>();
+	template int read<int>();
 
 	/**
 	 * Funkcja czyszcząca ekran
@@ -64,16 +86,17 @@ namespace console {
 	}
 
 	/**
-	 * Zatrzymanie konsoli (używane do efektu drukowania w menu).
+	 * Zatrzymanie konsoli (używane do efektu drukowania tekstu).
 	 *
 	 * @return void
 	 */
 	void _sleep() {
 		unsigned writing_delay = 0; // Opóżnienie przy wypisywaniu liter
-		if (_FPS > 0) { // Jeśli ma być jakieś opóżnienie, liczenie go na podstawie podanego FPS
-			writing_delay = 1000 / _FPS;
-		}
-		else return;
+		if (console::_FPS == 0) return;
+		// Jeśli ma być jakieś opóżnienie, liczenie go na podstawie podanego FPS
+		// Ciekawe optymalizacje... Jeśli _FPS == 0 to poniższy kod się nie wykona
+		// Ale VS i tak się czepia, że będzie dzielenie przez 0...
+		writing_delay = 1000 / (console::_FPS == 0 ? 1 : console::_FPS);
 		// Delay tylko przed literą/cyfrą
 #ifdef _WIN32
 		Sleep(writing_delay);
@@ -95,6 +118,9 @@ namespace console {
 		if (type == _NORMAL_STYLE) {
 			SetConsoleTextAttribute(console_out, _NORMAL_TEXT_STYLE);
 		}
+		else if (type == _ALTERNATIVE_STYLE) {
+			SetConsoleTextAttribute(console_out, _ALTERNATIVE_TEXT_STYLE);
+		}
 		else {
 			SetConsoleTextAttribute(console_out, _INDEX_TEXT_STYLE);
 		}
@@ -114,7 +140,8 @@ namespace console {
 	}
 
 	/**
-	 * Drukowanie wiersza menu
+	 * Drukowanie wiersza tekstu
+	 * @todo: flatten
 	 *
 	 * Jeśli indeks litery (liczony od 0) nie zostanie podany, nie będzie
 	 * zaznaczonej żadnej. Jeśli indeks zostanie podany, wyświetlona zostanie
@@ -130,6 +157,9 @@ namespace console {
 		if (key_letter == ALL || key_letter == 0) {
 			_set_style(_INDEX_STYLE);
 		}
+		else if (key_letter == ALTERNATIVE) {
+			_set_style(_ALTERNATIVE_STYLE);
+		}
 		else {
 			_set_style(_NORMAL_STYLE);
 		}
@@ -139,6 +169,9 @@ namespace console {
 		{
 			if (i == unsigned(key_letter) && key_letter != 0) {
 				_set_style(_INDEX_STYLE);
+			}
+			else if (key_letter == ALTERNATIVE) {
+				_set_style(_ALTERNATIVE_STYLE);
 			}
 			else if (i == unsigned(key_letter + 1)) {
 				_set_style(_NORMAL_STYLE);
@@ -150,7 +183,7 @@ namespace console {
 	}
 
 	/**
-	 * Alias dla funkcji wyświetlającej menu z pokolorowanym indeksem.
+	 * Alias dla funkcji wyświetlającej tekst z pokolorowanym indeksem.
 	 *
 	 * Jeśli podany zostanie wyraz to zaznaczona zostanie pierwsza litera.
 	 *
@@ -165,7 +198,7 @@ namespace console {
 	}
 
 	/**
-	 * Alias dla funkcji wyświetlającej menu z pokolorowanym indeksem.
+	 * Alias dla funkcji wyświetlającej tekst z pokolorowanym indeksem.
 	 *
 	 * Jeśli podany zostanie wyraz to zaznaczona zostanie litera tego wyrazu
 	 * o indeksie podanym jako ostatni argument (liczone od 0).
@@ -329,5 +362,69 @@ namespace console {
 		_thData.charCount--;
 		if (_thData.charCount & 1 && _thData.charFlag) return 0;
 		else return _thData.charValue;
-	};
+	}
+
+	/**
+	 * Pobieranie znaku i wypisanie go na konsolę
+	 *
+	 * @return pobrany znak
+	 */
+	int getche() {
+		const char ch = getch();
+		_out << ch;
+		return ch;
+	}
+
+	/**
+	 * Wymiary okna konsoli
+	 *
+	 * @return  <cols, rows>
+	 */
+	pair<unsigned, unsigned> get_size() {
+		CONSOLE_SCREEN_BUFFER_INFO csbi;
+		int columns, rows;
+
+		GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+		columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+		rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+
+		return pair<unsigned, unsigned>(columns, rows);
+	}
+
+	/**
+	 * Czyszczenie linii
+	 *
+	 * @param y numer linii do wyczyszczenia
+	 */
+	void clear_line(const unsigned y) {
+		const auto size = get_size();
+		if (y > size.second) return;
+
+		// Poprzednia pozycja kursora
+		const console::cursor TMP = get_cursor_pos();
+		// Tworzenie stringa o szerokości okna konsoli
+		string line;
+		line.append(size.first, _(' '));
+		// Czyszczenie
+		gotoxy(0,y);
+		print(line);
+		// Powrót
+		gotoxy(TMP);
+	}
+
+	/**
+	 * Ukrywanie kursora w konsoli
+	 *
+	 * @return true
+	 */
+	bool _hide_cursor() {
+		HANDLE hConsoleOutput;
+		CONSOLE_CURSOR_INFO structCursorInfo;
+		hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+		GetConsoleCursorInfo(hConsoleOutput, &structCursorInfo);
+		structCursorInfo.bVisible = FALSE;
+		SetConsoleCursorInfo(hConsoleOutput, &structCursorInfo);
+
+		return true;
+	}
 } // End namespace console

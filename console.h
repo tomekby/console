@@ -1,5 +1,5 @@
 ﻿/**
-* Klasa odpowiedzialna za obsługę frontendu, w szczególności menu
+* Klasa odpowiedzialna za obsługę frontendu w konsoli
 * Kompilowany kod jest różny w zależności od docelowego systemu.
 * Jest to spowodowane tym, że Windows i Linux używają różnych
 * sposobów formatowania konsoli (WinAPI/ANSI Escape Codes).
@@ -10,32 +10,42 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
+#ifdef _WIN32
+#   define _WIN32_WINNT 0x0501
+#   include <windows.h>
+#endif
+
 #include <iostream>
 #include <string>
+
+template<class T1, class T2>
+class pair {
+public:
+	pair() : first(T1()), second(T2()) {};
+	pair(const T1 v1, const T2 v2) : first(v1), second(v2) {};
+	pair(const pair &p) = default;
+	pair& operator=(const pair &p) = default;
+	// Wartości
+	T1 first;
+	T2 second;
+};
 
 namespace console {
 
 #ifdef _WIN32
-#   define _WIN32_WINNT 0x0501
-#   include <windows.h>
 #	include <io.h>
 #	include <fcntl.h>
 #	include <tchar.h>
 #	define _(x) _T(x)
-#	define _out std::wcout
-#	define _in  std::wcin
 	typedef std::wstring string;
 #	define LASTMODE		-1
 #	define C80			 3
 #	define C4350		 8
 #	define FULLSCREEN	 0x8000
-
 #else
 #   include <cstdio>
 #   include <unistd.h>
 #	define _(x) x
-#	define _out std::cout
-#	define _in  std::cin
 #	define ARRAYSIZE(x) sizeof(x) / sizeof(x[0])
 	typedef std::string string;
 #endif
@@ -69,6 +79,7 @@ namespace console {
 #ifdef _WIN32
 		COORD coords();
 #endif
+		const inline bool is_valid() { return (x < 10 && y < 10); }
 		unsigned x, y;
 	};
 
@@ -79,7 +90,7 @@ namespace console {
 	 * nie chce mi się sprawdzać co można wyrzucić
 	 */
 	struct _Conio2ThreadData {
-		//int attrib;
+		int attrib;
 		int charCount;
 		int charValue;
 		int charFlag;
@@ -97,10 +108,11 @@ namespace console {
 		DWORD prevOutputMode;
 		DWORD prevInputMode;
 	};
-	bool _InitConio2(); // Funkcja inicjująca w/w strukturę
+	bool _InitConio2(); // Funkcja inicjująca w/w 
+	bool _hide_cursor();
 	// Hack umożliwiający załadowanie przed main
 	// Nie wymaga używania makr do kontroli gdzie ląduje kod
-	const auto _INIT_HACK = _InitConio2();
+	const auto _INIT_HACK = _InitConio2() && _hide_cursor();
 #endif
 
 	/**
@@ -113,11 +125,16 @@ namespace console {
 	void print(const string &row, const string &keyword, const unsigned letter);
 	// Wszystkie znaki mają być pokolorowane
 	const unsigned ALL = 0xDEADBEEF;
+	const unsigned ALTERNATIVE = 0xBADDCAFE;
 	void gotoxy(const unsigned x, const unsigned y);
 	void gotoxy(const cursor &pos);
 	string title(const string &title);
 	cursor get_cursor_pos();
 	int getch();
+	int getche();
+	pair<unsigned, unsigned> get_size();
+	void clear_line(const unsigned y);
+	template<class T> T read();
 	bool _HandleKeyEvent(INPUT_RECORD *buf);
 	void _sleep();
 	void _set_style(const unsigned type);
@@ -126,12 +143,14 @@ namespace console {
 	/// Typ ustawianych informacji
 	const unsigned _NORMAL_STYLE = 1;
 	const unsigned _INDEX_STYLE = 2;
+	const unsigned _ALTERNATIVE_STYLE = 4;
 #ifdef _WIN32
 	/// Style: http://msdn.microsoft.com/en-us/library/windows/desktop/ms682088%28v=vs.85%29.aspx#_win32_character_attributes
 	// Styl normalnego wypisywanego tekstu
 	const unsigned _NORMAL_TEXT_STYLE = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	// Styl indeksu (zaznaczonej litery), który trzeba wpisać aby wybrać element z menu
 	const unsigned _INDEX_TEXT_STYLE = FOREGROUND_RED | FOREGROUND_INTENSITY;
+	const unsigned _ALTERNATIVE_TEXT_STYLE = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 #else
 	/// Style widoczne wyżej
 	constexpr unsigned _NORMAL_TEXT_STYLE[] = { RESET, BG_BLACK, BRIGHT, GREEN };
